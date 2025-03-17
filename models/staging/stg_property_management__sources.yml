@@ -14,6 +14,7 @@ sources:
 
     tables:
       - name: leases
+        description: Raw lease data
         columns:
           - name: id
             tests:
@@ -26,6 +27,7 @@ sources:
               - not_null
               - unique
       - name: units
+        description: Raw unit data
         columns:
           - name: id
             tests:

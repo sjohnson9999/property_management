@@ -2,7 +2,7 @@ version: 2
 
 models: 
   - name: stg_property_management__leases
-    description: One unique customer per row
+    description: One lease per row
     columns:
       - name: id
         description: Primary key
@@ -10,7 +10,7 @@ models:
           - unique
           - not_null
   - name: stg_property_management__properties
-    description: One unique customer per row
+    description: One property per row
     columns:
       - name: id
         description: Primary key
@@ -18,7 +18,7 @@ models:
           - unique
           - not_null
   - name: stg_property_management__rental_applications
-    description: One order per row
+    description: One application per row
     columns:
       - name: id
         description: Primary key
@@ -26,7 +26,7 @@ models:
           - unique
           - not_null
   - name: stg_property_management__units
-    description: One order per row
+    description: One unit per row
     columns:
       - name: id
         description: Primary key
@@ -34,6 +34,7 @@ models:
           - unique
           - not_null
       - name: status
+        description: "{{ doc('unit_status') }}"
         tests:
           - accepted_values:
               values:

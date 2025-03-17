@@ -4,8 +4,46 @@ sources:
   - name: property_management
     database: raw
     schema: property_management
+    freshness: 
+      error_after:
+        count: 2
+        period: day
+      warn_after:
+        count: 1
+        period: day
+
     tables:
       - name: leases
+        columns:
+          - name: id
+            tests:
+              - not_null
+              - unique
       - name: properties
+        columns:
+          - name: id
+            tests:
+              - not_null
+              - unique
       - name: units
+        columns:
+          - name: id
+            tests:
+              - not_null
+              - unique
+          - name: status
+            tests:
+              - not_null
+              - accepted_values:
+                  values:
+                    - rented
+                    - occupied
+                    - construction
+                    - vacant
+
       - name: rental_applications
+        columns:
+          - name: id
+            tests:
+              - not_null
+              - unique

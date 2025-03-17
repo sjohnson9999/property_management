@@ -1,0 +1,52 @@
+version: 2
+
+models: 
+  - name: stg_property_management__leases
+    description: One unique customer per row
+    columns:
+      - name: id
+        description: Primary key
+        tests:
+          - unique
+          - not_null
+  - name: stg_property_management__properties
+    description: One unique customer per row
+    columns:
+      - name: id
+        description: Primary key
+        tests:
+          - unique
+          - not_null
+  - name: stg_property_management__rental_applications
+    description: One order per row
+    columns:
+      - name: id
+        description: Primary key
+        tests:
+          - unique
+          - not_null
+  - name: stg_property_management__units
+    description: One order per row
+    columns:
+      - name: id
+        description: Primary key
+        tests:
+          - unique
+          - not_null
+      - name: status
+        tests:
+          - accepted_values:
+              values:
+                - rented
+                - occupied
+                - construction
+                - vacant
+      - name: property_id
+        tests:
+          - relationships:
+              field: id
+              to: ref('stg_property_management__properties')
+      - name: rent
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: "> 0"

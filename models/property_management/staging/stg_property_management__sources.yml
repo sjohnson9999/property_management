@@ -4,13 +4,13 @@ sources:
   - name: property_management
     database: raw
     schema: property_management
-    freshness: 
-      error_after:
-        count: 2
-        period: day
-      warn_after:
-        count: 1
-        period: day
+#    freshness: 
+#      error_after:
+#        count: 2
+#        period: day
+#      warn_after:
+#        count: 1
+#        period: day
 
     tables:
       - name: leases

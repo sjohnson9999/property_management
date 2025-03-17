@@ -10,21 +10,23 @@ units as (
 
 ),
 
-applications as (
+apps as (
 
     select * from {{ ref('stg_property_management__rental_applications') }}
 
 ),
 
-application_leases as (
-
-    select * from applications left join leases on applications.id = leases.rental_application_id
-
-),
-
 final as (
 
-    select * from application_leases left join units on units.id = application_leases.unit_id
+    select
+        leases.id as lease_id,
+        units.id as unit_id,
+        apps.contact_info_id as contact_info_id,
+        leases.start_date as start_date,
+        leases.end_date as end_date,
+    from leases 
+        left join units on units.id = leases.unit_id
+        left join apps on apps.id = leases.rental_application_id
 
 )
 
